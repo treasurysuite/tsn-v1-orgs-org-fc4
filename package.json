@@ -1,5 +1,5 @@
 {
-  "name": "tsn-v1-template",
+  "name": "tsn-v1-fc4",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,5 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
