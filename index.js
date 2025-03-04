@@ -1,7 +1,6 @@
-
 module.exports = [
   {
-    nodule: 'orgs/org/tsn/template',
+    nodule: 'orgs/org/fc4',
     access: [
       {
         admin: true,
@@ -13,11 +12,12 @@ module.exports = [
       },
     ],
 
-    forms: {
+    forms: {},
+    urls: {},
+    models: {
+      test: {
+        return: ['xyz'],
+      },
     },
-    urls: {
-  
-    },
-    models: {},
   },
 ];
