@@ -1,6 +1,6 @@
 const flowdocManager = require('./lib/FlowdocManager.js');
 
-const fc3Intervals = [
+const fc4Intervals = [
   {
     id: 'week',
     forecast_name: 'Weeks',
@@ -24,6 +24,29 @@ const fc3Intervals = [
     sortorder: 4,
     forecast_name: 'Days',
     name: 'Daily',
+  },
+];
+
+const fc4ModelDateStates = [
+  {
+    id: 'working',
+    color: 'success',
+    action: 'Working',
+    name: 'Working',
+  },
+
+  {
+    id: 'complete',
+    color: 'warning',
+    action: 'Complete',
+    name: 'Complete',
+  },
+
+  {
+    id: 'submitted',
+    color: 'info',
+    action: 'Submit',
+    name: 'Submitted',
   },
 ];
 
@@ -59,7 +82,16 @@ module.exports = [
     },
     models: {
       intervals: {
-        return: fc3Intervals,
+        return: fc4Intervals,
+      },
+      model_date_states: {
+        return: fc4ModelDateStates,
+      },
+      config: {
+        return: {
+          intervals: fc4Intervals,
+          model_date_states: fc4ModelDateStates,
+        },
       },
       test: {
         return: async (nFc4) => {
@@ -75,6 +107,7 @@ module.exports = [
     },
   },
   ...require('./src/forecasts.js'),
+  ...require('./src/forecasts/forecast/reports.js'),
   ...require('./src/forecasts/forecast/models.js'),
   ...require('./src/forecasts/forecast/models/model/dates.js'),
 ];

@@ -216,6 +216,27 @@ let forecasts = [
       },
     },
     models: {
+      model_dates: {
+        return: async (nForecast) => {
+          let sqlString = `
+          SELECT 
+          m.id as model,
+          d.id as date,
+          m.name,
+          d.state
+          FROM org_fc4_forecast_model_dates AS d 
+          JOIN org_fc4_forecast_models AS m 
+          ON m.org = d.org 
+          AND m.id = d.model
+          AND m.forecast = d.forecast
+          AND m.status = 1 
+          WHERE d.forecast = ${nForecast.sql.escape(nForecast.path.id)}
+          AND d.org = ${nForecast.sql.escape(nForecast.path.parent.ids.org)}
+          AND d.status = 1
+          `;
+          return await nForecast.sql.q(sqlString);
+        },
+      },
       accounts: {
         return: async (nForecast) => {
           let sqlFilter = null;
