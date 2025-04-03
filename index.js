@@ -13,12 +13,12 @@ const fc4Intervals = [
     forecast_name: 'Months',
     name: 'Monthly',
   },
-  {
-    id: 'quarter',
-    sortorder: 3,
-    forecast_name: 'Quarters',
-    name: 'Quarterly',
-  },
+  // {
+  //   id: 'quarter',
+  //   sortorder: 3,
+  //   forecast_name: 'Quarters',
+  //   name: 'Quarterly',
+  // },
   {
     id: 'day',
     sortorder: 4,

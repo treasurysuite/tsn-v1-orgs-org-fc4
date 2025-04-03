@@ -135,6 +135,7 @@ let forecasts = [
         name: 'grouping',
         field_type: 'dropdown',
         required: true,
+        default: 'accounts_categories',
         options: {
           zero_select: true,
           items: [
@@ -169,6 +170,32 @@ let forecasts = [
       },
     ],
     models: {
+      model_dates: {
+        return: async (nForecast) => {
+          let sqlString = `
+          SELECT 
+          f.id as forecast,
+          m.id as model,
+          d.id as date,
+          f.name as forecast_name,
+          m.name as model_name,
+          d.state
+          FROM org_fc4_forecast_model_dates AS d 
+          JOIN org_fc4_forecasts AS f 
+          ON f.org = d.org 
+          AND f.id = d.forecast
+          AND f.status = 1
+          JOIN org_fc4_forecast_models AS m 
+          ON m.org = d.org 
+          AND m.id = d.model
+          AND m.forecast = d.forecast
+          AND m.status = 1 
+          WHERE  d.org = ${nForecast.sql.escape(nForecast.path.parent.ids.org)}
+          AND d.status = 1
+          `;
+          return await nForecast.sql.q(sqlString);
+        },
+      },
       list: {
         subscribe: true,
         fields: [
@@ -188,12 +215,12 @@ let forecasts = [
     },
     forms: {
       create: {
-        title: 'Create Forecast Segment',
+        title: 'Create Forecast Group',
         options: {
           instructions:
             'Forecast across accounts by entity, business unit, region, currency, or any custom operating division.',
         },
-        fields: ['name', 'segment', 'accounts', 'entities', 'currencies', 'grouping', 'interval', 'periods'],
+        fields: ['name', 'segment', 'accounts', 'entities', 'currencies', 'interval', 'periods'],
       },
     },
   },
