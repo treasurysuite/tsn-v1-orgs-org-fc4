@@ -170,7 +170,7 @@ let forecasts = [
       },
     ],
     models: {
-      x_model_dates: {
+      model_dates: {
         return: async (nForecast) => {
           // test
           let sqlString = `
